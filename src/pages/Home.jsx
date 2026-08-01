@@ -1,4 +1,5 @@
 import BlobBackground from '../components/BlobBackground';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   return (
@@ -6,9 +7,9 @@ export default function Home() {
       <nav className="fixed top-0 w-full z-50 bg-surface-container/90 backdrop-blur-xl border-b border-white/10 h-20 flex justify-between items-center px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto left-0 right-0">
         <span className="font-headline text-2xl font-bold text-on-surface">Checkpoint</span>
         <div className="hidden md:flex items-center gap-gutter">
-          <a className="font-body text-primary border-b-2 border-primary pb-1" href="#">Dashboard</a>
+          <Link className="font-body text-primary border-b-2 border-primary pb-1" to="/dashboard">Dashboard</Link>
           <a className="font-body text-on-surface-variant hover:text-primary transition-colors" href="#">Resume</a>
-          <a className="font-body text-on-surface-variant hover:text-primary transition-colors" href="#">Profile</a>
+          <Link className="font-body text-on-surface-variant hover:text-primary transition-colors" to="/profile">Profile</Link>
         </div>
         <div className="flex items-center gap-4">
           <button className="hidden sm:block font-label text-on-surface-variant hover:text-primary transition-colors">Sign Out</button>
