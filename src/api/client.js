@@ -39,4 +39,16 @@ export const api = {
 
   getResumes: () =>
     request('/resumes', { method: 'GET' }),
+
+  analyzeJd: (resumeId, jdText) =>
+    request(`/resumes/${resumeId}/analyze-jd`, { method: 'POST', body: JSON.stringify({ jdText }) }),
+
+  tailorResume: (resumeId, jdText, missingKeywords) =>
+  request(`/resumes/${resumeId}/tailor`, { method: 'POST', body: JSON.stringify({ jdText, missingKeywords }) }),
+
+saveVersion: (resumeId, data) =>
+  request(`/resumes/${resumeId}/versions`, { method: 'POST', body: JSON.stringify(data) }),
+
+getVersions: (resumeId) =>
+  request(`/resumes/${resumeId}/versions`, { method: 'GET' }),
 };

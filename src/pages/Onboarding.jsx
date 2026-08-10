@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../api/client';
+import TagInput from '../components/TagInput';
 
 const TEMPLATES = [
   { id: 'modern', name: 'Modern', desc: 'Clean single-column, ATS-friendly' },
@@ -14,7 +15,7 @@ export default function Onboarding() {
     fullName: '', email: '', phone: '', linkedin: '',
     education: [{ institution: '', degree: '', year: '' }],
     experience: [{ title: '', company: '', dates: '', bullets: '' }],
-    skills: '',
+    skills: [],
     projects: [{ title: '', description: '' }],
     summary: '',
     templateId: 'modern',
@@ -118,11 +119,11 @@ export default function Onboarding() {
         )}
 
         {step === 4 && (
-          <div className="flex flex-col gap-stack-md">
-            <h2 className="font-headline text-2xl text-on-surface mb-2">Skills</h2>
-            <textarea className="bg-black/40 border border-white/10 rounded-lg p-3 text-on-surface focus:outline-none focus:border-primary" placeholder="Comma-separated: React, Java, Spring Boot..." rows={4} value={form.skills} onChange={e => updateField('skills', e.target.value)} />
-          </div>
-        )}
+  <div className="flex flex-col gap-stack-md">
+    <h2 className="font-headline text-2xl text-on-surface mb-2">Skills</h2>
+    <TagInput tags={form.skills} setTags={(tags) => updateField('skills', tags)} />
+  </div>
+)}
 
         {step === 5 && (
           <div className="flex flex-col gap-stack-md">

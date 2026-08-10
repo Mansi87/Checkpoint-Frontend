@@ -5,6 +5,8 @@ import Profile from './pages/Profile';
 import Onboarding from './pages/Onboarding';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import JdAnalysis from './pages/JdAnalysis';
+import VersionHistory from './pages/VersionHistory';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/resumes/:resumeId/analyze" element={<JdAnalysis />} />
+        <Route path="/resumes/:resumeId/versions" element={<VersionHistory />} />
       </Routes>
     </BrowserRouter>
   );
