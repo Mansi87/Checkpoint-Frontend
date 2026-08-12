@@ -2,11 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../api/client';
 import TagInput from '../components/TagInput';
-
-const TEMPLATES = [
-  { id: 'modern', name: 'Modern', desc: 'Clean single-column, ATS-friendly' },
-  { id: 'classic', name: 'Classic', desc: 'Traditional two-column layout' },
-];
+import { TEMPLATES } from '../data/templates';
+import TemplateCard from '../components/TemplateCard';
 
 export default function Onboarding() {
   const navigate = useNavigate();
@@ -18,7 +15,7 @@ export default function Onboarding() {
     skills: [],
     projects: [{ title: '', description: '' }],
     summary: '',
-    templateId: 'modern',
+    templateId: 'ats-minimal',
     title: '',
   });
 
@@ -142,14 +139,20 @@ export default function Onboarding() {
         {step === 6 && (
           <div className="flex flex-col gap-stack-md">
             <h2 className="font-headline text-2xl text-on-surface mb-2">Choose a Template</h2>
-            <input className="bg-black/40 border border-white/10 rounded-lg p-3 text-on-surface focus:outline-none focus:border-primary mb-2" placeholder="Name this resume (e.g. 'Backend Dev Track')" value={form.title} onChange={e => updateField('title', e.target.value)} />
-            <div className="grid grid-cols-2 gap-stack-md">
+            <input
+              className="bg-black/40 border border-white/10 rounded-lg p-3 text-on-surface focus:outline-none focus:border-primary mb-4"
+              placeholder="Name this resume (e.g. 'Backend Dev Track')"
+              value={form.title}
+              onChange={e => updateField('title', e.target.value)}
+            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {TEMPLATES.map(t => (
-                <div key={t.id} onClick={() => updateField('templateId', t.id)}
-                  className={`glass-panel rounded-xl p-6 cursor-pointer transition-all ${form.templateId === t.id ? 'border-primary' : ''}`}>
-                  <h3 className="font-body font-semibold text-on-surface">{t.name}</h3>
-                  <p className="text-on-surface-variant text-sm mt-1">{t.desc}</p>
-                </div>
+                <TemplateCard
+                  key={t.id}
+                  template={t}
+                  selected={form.templateId === t.id}
+                  onSelect={(id) => updateField('templateId', id)}
+                />
               ))}
             </div>
           </div>

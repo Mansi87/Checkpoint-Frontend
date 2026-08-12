@@ -51,4 +51,10 @@ saveVersion: (resumeId, data) =>
 
 getVersions: (resumeId) =>
   request(`/resumes/${resumeId}/versions`, { method: 'GET' }),
+
+getResume: (id) =>
+  request(`/resumes/${id}`, { method: 'GET' }),
+
+updateResume: (id, data) =>
+  request(`/resumes/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
 };
