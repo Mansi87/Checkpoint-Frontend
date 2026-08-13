@@ -55,19 +55,28 @@ export default function Dashboard() {
     <h2 className="font-headline text-4xl text-on-surface">Dashboard</h2>
     <p className="font-body text-on-surface-variant mt-1">Real-time status of your career pipeline.</p>
   </div>
+
   <div className="flex items-center gap-4">
-    {resumes.length > 0 && (
-      <Link
-        to={`/resumes/${resumes[0].id}/analyze`}
-        className="border border-primary text-primary hover:bg-primary hover:text-on-primary transition-all py-3 px-6 rounded-xl font-label flex items-center gap-2"
-      >
-        Analyze a JD
-      </Link>
-    )}
-    <button className="liquid-glass-primary py-3 px-6 rounded-xl font-label flex items-center gap-2">
-      Upgrade to Pro
-    </button>
-  </div>
+  {resumes.length > 0 && (
+    <Link
+      to={`/resumes/${resumes[0].id}/analyze`}
+      className="border border-primary text-primary hover:bg-primary hover:text-on-primary transition-all py-3 px-6 rounded-xl font-label flex items-center gap-2"
+    >
+      Analyze a JD
+    </Link>
+  )}
+  {resumes.length > 0 && (
+    <Link
+      to={`/resumes/${resumes[0].id}/view`}
+      className="border border-primary text-primary hover:bg-primary hover:text-on-primary transition-all py-3 px-6 rounded-xl font-label flex items-center gap-2"
+    >
+      View Resume
+    </Link>
+  )}
+  <button className="liquid-glass-primary py-3 px-6 rounded-xl font-label flex items-center gap-2">
+    Upgrade to Pro
+  </button>
+</div>
 </header>
 
         <div className="grid grid-cols-12 gap-gutter">

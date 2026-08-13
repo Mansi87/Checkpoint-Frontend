@@ -9,6 +9,16 @@ export function parseResumeData(resume) {
     dynamicFields = resume.currentDynamicFields ? JSON.parse(resume.currentDynamicFields) : {};
   } catch {}
 
+  const rawBullets = dynamicFields.experienceBullets || [];
+  const experienceBullets = rawBullets.map(b =>
+    Array.isArray(b) ? b : (typeof b === 'string' ? b.split('\n').filter(line => line.trim()) : [])
+  );
+
+  const rawSkills = dynamicFields.skills;
+  const skills = Array.isArray(rawSkills)
+    ? rawSkills
+    : (typeof rawSkills === 'string' ? rawSkills.split(',').map(s => s.trim()).filter(Boolean) : []);
+
   return {
     fullName: staticFields.fullName || '',
     email: staticFields.email || '',
@@ -20,8 +30,8 @@ export function parseResumeData(resume) {
     biodata: staticFields.biodata || { dob: '', gender: '', maritalStatus: '', nationality: '' },
     photoUrl: staticFields.photoUrl || '',
     summary: dynamicFields.summary || '',
-    skills: dynamicFields.skills || [],
-    experienceBullets: dynamicFields.experienceBullets || [],
+    skills,
+    experienceBullets,
     projectDescriptions: dynamicFields.projectDescriptions || [],
   };
 }

@@ -46,6 +46,20 @@ export const api = {
   tailorResume: (resumeId, jdText, missingKeywords) =>
   request(`/resumes/${resumeId}/tailor`, { method: 'POST', body: JSON.stringify({ jdText, missingKeywords }) }),
 
+  parseUpload: (file) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  const token = localStorage.getItem('token');
+  return fetch('http://localhost:8080/api/resumes/parse-upload', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}` },
+    body: formData,
+  }).then(res => {
+    if (!res.ok) throw new Error('Parse failed');
+    return res.json();
+  });
+},
+
 saveVersion: (resumeId, data) =>
   request(`/resumes/${resumeId}/versions`, { method: 'POST', body: JSON.stringify(data) }),
 

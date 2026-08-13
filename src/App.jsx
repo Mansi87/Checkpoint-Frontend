@@ -7,6 +7,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import JdAnalysis from './pages/JdAnalysis';
 import VersionHistory from './pages/VersionHistory';
+import ResumeView from './pages/ResumeView';
+import UploadReview from './pages/UploadReview';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/resumes/:resumeId/analyze" element={<JdAnalysis />} />
         <Route path="/resumes/:resumeId/versions" element={<VersionHistory />} />
+        <Route path="/resumes/:resumeId/view" element={<ResumeView />} />
+        <Route path="/upload-resume" element={<UploadReview />} />
       </Routes>
     </BrowserRouter>
   );
