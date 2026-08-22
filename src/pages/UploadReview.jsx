@@ -29,7 +29,7 @@ export default function UploadReview() {
 
   const handleContinue = () => {
     // Fields get passed to onboarding, pre-filled — user completes the rest there
-    navigate('/onboarding', { state: { prefill: fields } });
+    navigate('/onboarding', { state: { prefill: fields, sections: parsed.sections } });
   };
 
   return (
@@ -41,12 +41,20 @@ export default function UploadReview() {
 
         {!parsed && (
           <>
-            <input
-              type="file"
-              accept=".pdf,.docx"
-              onChange={e => setFile(e.target.files[0])}
-              className="block w-full text-on-surface-variant text-sm mb-4"
-            />
+            <div className="flex items-center gap-3 mb-4">
+              <label className="liquid-glass-primary px-5 py-2.5 rounded-full font-label text-sm cursor-pointer whitespace-nowrap">
+                Choose File
+                <input
+                  type="file"
+                  accept=".pdf,.docx"
+                  onChange={e => setFile(e.target.files[0])}
+                  className="hidden"
+                />
+              </label>
+              <span className="text-on-surface-variant text-sm truncate">
+                {file ? file.name : 'No file chosen'}
+              </span>
+            </div>
             <button
               onClick={handleUpload}
               disabled={!file || loading}

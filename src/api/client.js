@@ -71,4 +71,16 @@ getResume: (id) =>
 
 updateResume: (id, data) =>
   request(`/resumes/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+
+salaryLookup: (role, city) =>
+  request(`/salary/lookup?role=${encodeURIComponent(role)}${city ? `&city=${encodeURIComponent(city)}` : ''}`, { method: 'GET' }),
+
+salarySubmit: (data) =>
+  request('/salary/submit', { method: 'POST', body: JSON.stringify(data) }),
+
+salarySkip: () =>
+  request('/salary/skip', { method: 'POST' }),
+
+shouldShowSalaryPrompt: () =>
+  request('/salary/should-prompt', { method: 'GET' }),
 };

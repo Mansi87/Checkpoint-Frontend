@@ -4,20 +4,27 @@ import { api } from '../api/client';
 import TagInput from '../components/TagInput';
 import { TEMPLATES } from '../data/templates';
 import TemplateCard from '../components/TemplateCard';
+import { useLocation } from 'react-router-dom';
 
 export default function Onboarding() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const prefillData = location.state?.prefill;
+  const sectionsData = location.state?.sections;
   const [step, setStep] = useState(1);
   const [form, setForm] = useState({
-    fullName: '', email: '', phone: '', linkedin: '',
-    education: [{ institution: '', degree: '', year: '' }],
-    experience: [{ title: '', company: '', dates: '', bullets: '' }],
-    skills: [],
-    projects: [{ title: '', description: '' }],
-    summary: '',
-    templateId: 'ats-minimal',
-    title: '',
-  });
+  fullName: prefillData?.fullName || '',
+  email: prefillData?.email || '',
+  phone: prefillData?.phone || '',
+  linkedin: prefillData?.linkedin || '',
+  education: [{ institution: sectionsData?.educationLines?.join(' ') || '', degree: '', year: '' }],
+  experience: [{ title: '', company: '', dates: '', bullets: sectionsData?.experienceLines?.join('\n') || '' }],
+  skills: sectionsData?.skillsLines?.join(' ').split(/[,•]/).map(s => s.trim()).filter(Boolean) || [],
+  projects: [{ title: '', description: '' }],
+  summary: '',
+  templateId: 'ats-minimal',
+  title: '',
+});
 
   const totalSteps = 6;
 

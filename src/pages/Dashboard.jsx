@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../api/client';
+import SalaryPopup from '../components/SalaryPopup';
 
 export default function Dashboard() {
   const [resumes, setResumes] = useState([]);
+  const [showSalaryPopup, setShowSalaryPopup] = useState(false);
 
   useEffect(() => {
     api.getResumes().then(setResumes).catch(() => setResumes([]));
+  }, []);
+  useEffect(() => {
+  api.shouldShowSalaryPrompt().then(setShowSalaryPopup).catch(() => {});
   }, []);
   return (
     <div className="flex min-h-screen bg-surface-container-lowest">
@@ -155,6 +160,7 @@ export default function Dashboard() {
           </div>
         </div>
       </main>
+      {showSalaryPopup && <SalaryPopup onClose={() => setShowSalaryPopup(false)} />}
     </div>
   );
 }
