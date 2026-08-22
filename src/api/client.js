@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8080/api';
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
 
 async function request(endpoint, options = {}) {
   const token = localStorage.getItem('token');
@@ -50,7 +50,7 @@ export const api = {
   const formData = new FormData();
   formData.append('file', file);
   const token = localStorage.getItem('token');
-  return fetch('http://localhost:8080/api/resumes/parse-upload', {
+  return fetch(`${BASE_URL}/resumes/parse-upload`, {
     method: 'POST',
     headers: { Authorization: `Bearer ${token}` },
     body: formData,
