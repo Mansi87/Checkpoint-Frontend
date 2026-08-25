@@ -8,11 +8,11 @@ export default function Home() {
         <span className="font-headline text-2xl font-bold text-on-surface">Checkpoint</span>
         <div className="hidden md:flex items-center gap-gutter">
           <Link className="font-body text-primary border-b-2 border-primary pb-1" to="/dashboard">Dashboard</Link>
-          <a className="font-body text-on-surface-variant hover:text-primary transition-colors" href="#">Resume</a>
+          <Link className="font-body text-on-surface-variant hover:text-primary transition-colors" to="/dashboard">Resume</Link>
           <Link className="font-body text-on-surface-variant hover:text-primary transition-colors" to="/profile">Profile</Link>
         </div>
         <div className="flex items-center gap-4">
-          <button className="hidden sm:block font-label text-on-surface-variant hover:text-primary transition-colors">Sign Out</button>
+          <Link className="hidden sm:block font-label text-on-surface-variant hover:text-primary transition-colors" to="/login">Login</Link>
           <button className="liquid-glass-primary px-6 py-2 rounded-xl font-label active:scale-95 transition-transform duration-200">Upgrade</button>
         </div>
       </nav>

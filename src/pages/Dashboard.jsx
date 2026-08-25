@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../api/client';
 import SalaryPopup from '../components/SalaryPopup';
+import { useNavigate } from 'react-router-dom';
+import { signOut } from '../utils/auth';
 
 export default function Dashboard() {
   const [resumes, setResumes] = useState([]);
   const [showSalaryPopup, setShowSalaryPopup] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     api.getResumes().then(setResumes).catch(() => setResumes([]));
@@ -25,7 +28,7 @@ export default function Dashboard() {
           <a className="bg-primary-container text-on-primary-container rounded-xl p-3 flex items-center gap-3 font-label" href="#">
             Overview
           </a>
-          <a className="text-on-surface-variant p-3 flex items-center gap-3 font-label hover:bg-surface-variant/50 rounded-xl transition-all" href="#">
+          {/* <a className="text-on-surface-variant p-3 flex items-center gap-3 font-label hover:bg-surface-variant/50 rounded-xl transition-all" href="#">
             Analytics
           </a>
           <a className="text-on-surface-variant p-3 flex items-center gap-3 font-label hover:bg-surface-variant/50 rounded-xl transition-all" href="#">
@@ -36,7 +39,7 @@ export default function Dashboard() {
             </Link>
             <a className="text-on-surface-variant p-3 flex items-center gap-3 font-label hover:bg-surface-variant/50 rounded-xl transition-all" href="#">
             Settings
-        </a>
+        </a> */}
         </nav>
         <div className="mt-auto pt-stack-md border-t border-white/5">
           <div className="flex items-center gap-3 mb-6 p-1">
@@ -46,7 +49,7 @@ export default function Dashboard() {
               <p className="font-label text-xs text-on-surface-variant">Free Tier</p>
             </div>
           </div>
-          <button className="w-full py-3 px-4 border border-outline/30 rounded-xl text-on-surface font-label hover:bg-surface-variant/30 transition-all">
+          <button onClick={() => signOut(navigate)} className="w-full py-3 px-4 border border-outline/30 rounded-xl text-on-surface font-label hover:bg-surface-variant/30 transition-all">
             Sign Out
           </button>
         </div>
@@ -121,7 +124,7 @@ export default function Dashboard() {
           <div className="col-span-12 lg:col-span-8 flex flex-col gap-stack-md">
             <div className="flex justify-between items-center mb-2">
               <h3 className="font-headline text-2xl text-on-surface">Recent JD Analysis</h3>
-              <a className="text-primary font-label hover:underline" href="#">View All</a>
+              <Link className="text-primary font-label hover:underline" to={resumes.length > 0 ? `/resumes/${resumes[0].id}/versions` : '#'}>View All</Link>
             </div>
             <div className="glass-panel rounded-xl p-6 flex items-center justify-between cursor-pointer hover:bg-surface-variant/20">
               <div>

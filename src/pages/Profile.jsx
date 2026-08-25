@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { signOut } from '../utils/auth';
 
 export default function Profile() {
+  const navigate = useNavigate();
   return (
     <div className="bg-background text-on-surface min-h-screen">
       {/* Sidebar */}
@@ -10,11 +13,11 @@ export default function Profile() {
           <p className="font-label text-xs text-on-surface-variant opacity-70">Career Management</p>
         </div>
         <nav className="flex flex-col gap-2 flex-grow">
-          <a className="flex items-center gap-3 text-on-surface-variant p-3 hover:bg-surface-variant/50 rounded-xl transition-all" href="#">Analytics</a>
-          <a className="flex items-center gap-3 text-on-surface-variant p-3 hover:bg-surface-variant/50 rounded-xl transition-all" href="#">History</a>
+          {/* <a className="flex items-center gap-3 text-on-surface-variant p-3 hover:bg-surface-variant/50 rounded-xl transition-all" href="#">Analytics</a>
+          <a className="flex items-center gap-3 text-on-surface-variant p-3 hover:bg-surface-variant/50 rounded-xl transition-all" href="#">History</a> */}
           <Link className="flex items-center gap-3 text-on-surface-variant p-3 hover:bg-surface-variant/50 rounded-xl transition-all" to="/dashboard">Overview</Link>
           <a className="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-xl p-3" href="#">Profile</a>
-          <a className="flex items-center gap-3 text-on-surface-variant p-3 hover:bg-surface-variant/50 rounded-xl transition-all" href="#">Settings</a>
+          {/* <a className="flex items-center gap-3 text-on-surface-variant p-3 hover:bg-surface-variant/50 rounded-xl transition-all" href="#">Settings</a> */}
         </nav>
         <div className="mt-auto pt-stack-md border-t border-white/5">
           <div className="flex items-center gap-3 p-3">
@@ -23,6 +26,9 @@ export default function Profile() {
               <span className="font-label text-on-surface truncate max-w-[120px]">User Name</span>
               <span className="font-label text-xs text-primary">Free Tier</span>
             </div>
+            <button onClick={() => signOut(navigate)} className="w-full py-3 px-4 border border-outline/30 rounded-xl text-on-surface font-label hover:bg-surface-variant/30 transition-all">
+              Sign Out
+            </button>
           </div>
         </div>
       </aside>
