@@ -111,11 +111,12 @@ export default function TagInput({ tags, setTags }) {
       {showSuggestions && input && filtered.length > 0 && (
         <div className="absolute z-10 mt-1 w-full bg-surface-container-high border border-white/10 rounded-lg overflow-hidden">
           {filtered.map((s, i) => (
+           
             <button
               key={i}
               type="button"
               className="block w-full text-left px-4 py-2 text-on-surface hover:bg-primary/10 hover:text-primary text-sm"
-              onClick={() => addTag(s)}
+              onMouseDown={(e) => { e.preventDefault(); addTag(s); }}
             >
               {s}
             </button>

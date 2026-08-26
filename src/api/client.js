@@ -13,9 +13,16 @@ async function request(endpoint, options = {}) {
   });
 
   if (!res.ok) {
-    const errorText = await res.text();
-    throw new Error(errorText || `Request failed: ${res.status}`);
+  let message = `Request failed (${res.status})`;
+  try {
+    const errorData = await res.json();
+    message = errorData.error || errorData.message || (typeof errorData === 'string' ? errorData : message);
+  } catch {
+    const text = await res.text().catch(() => '');
+    if (text && !text.startsWith('{')) message = text;
   }
+  throw new Error(message);
+}
 
   const contentType = res.headers.get('content-type');
   if (contentType && contentType.includes('application/json')) {
